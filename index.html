@@ -4,7 +4,13 @@
 <script>
 
 originX = window.prompt("Enter origin X value:");
+if (isNaN(originX) || originX == "") {
+    originX = 0;
+}
 originY = window.prompt("Enter origin Y value:");
+if (isNaN(originY) || originY == "") {
+    originY = 0;
+}
 
 // get json coordinates file
 var xmlHttp = new XMLHttpRequest();
@@ -66,8 +72,9 @@ function printCoordinates(coordinates) {
         var out = "";
 
         for(i = 0; i < coordinates.length; i++) {
-            out += coordinates[i][0] + ' > ' + coordinates[i][1] + ' > ' + coordinates[i][2] + '</a><br />';
+            out += coordinates[i][0] + ' > ' + coordinates[i][1] + ' > ' + coordinates[i][2] + '<br />';
         }
+    document.getElementById("heading").innerHTML = "id > coordinates > distance to origin (" + originX.toString() + ", " + originY.toString() + ")";
     document.getElementById("coordinates").innerHTML = out;
 }
 
@@ -75,7 +82,7 @@ function printCoordinates(coordinates) {
 </head>
 
 <body>
-<p>id > coordinates > distance to origin</p>
+<h2 id="heading"></h2>
 <div id="coordinates"></div>
 </body>
 </html>
